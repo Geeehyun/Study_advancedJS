@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>로컬 스토리지에 데이터 저장 및 출력하기</h1>
+  <script>
+    // 로컬스토리지에 값 저장하는 부분은 JS Script로 처리 함.
+    localStorage.setItem("weekDay1", "월요일");
+    localStorage.setItem("weekDay2", "화요일");
+    localStorage.setItem("weekDay3", "수요일");
+    localStorage.setItem("lunch1", "샌드위치");
+
+
+    console.log("로컬스토리지에 있는 weekDay1 값 : " + localStorage.getItem("weekDay"));
+    console.log("로컬스토리지에 있는 Key의 개수 : " + localStorage.length);
+    
+    localStorage.removeItem("weekDay1");
+    
+    
+    console.log("로컬스토리지에 있는 Key의 개수 : " + localStorage.length);
+
+    let key, value;
+
+    for(let i=0; i < localStorage.length; i++) {
+      key = localStorage.key(i);
+      value = localStorage.getItem(key);
+
+      console.log("key : " + key + ", value : " + value);
+    }
+
+    // 실제 사용 시는 주로 일회성 데이터를 저장할 때 사용 함
+    // 개발자도구(F12) > Application > Stroage > LocalStorage > 해당 도메인 별로 저장되어있는걸 확인할 수 있음.
+  </script>
+</body>
+</html>

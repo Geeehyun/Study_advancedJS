@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실습</title>
+</head>
+<body onload="showList()">
+  <table>
+    <tr>
+      <td>
+        <label for="color">색상 선택</label>
+        <select name="color" id="color">
+          <option value="">색상선택</option>
+          <option value="red">red</option>
+          <option value="orange">orange</option>
+          <option value="yellow">yellow</option>
+          <option value="green">green</option>
+          <option value="blue">blue</option>
+          <option value="navy">navy</option>
+          <option value="purple">purple</option>
+        </select>
+      </td>
+      <td>
+        <label for="nm">고객성명</label>
+        <input id="nm" name="nm" type="text" value="" maxlength="30" placeholder="고객성명">
+      </td>
+      <td>
+        <label for="phone">전화번호</label>
+        <input id="phone" name="phone" type="text" value="" maxlength="30" placeholder="전화번호">
+      </td>
+      <td>
+        <input type="button" id="add" value="추가" onclick="addStorage()">
+        <input type="button" id="del" value="전부 초기화" onclick="deleteAll()">
+      </td>
+    </tr>
+  </table>
+  <ul id="list"> 
+  </ul>
+  <script>
+    function addStorage() {
+      let color = document.querySelector("#color");
+      let nm = document.querySelector("#nm");
+      let phone = document.querySelector("#phone");
+
+
+
+      if (!color.value) {
+        alert("색상을 선택해주세요");
+        return false;
+      }
+      if (!nm.value) {
+        alert("이름을 입력해주세요");
+        return false;
+      }
+      if (!phone.value) {
+        alert("전화번호를 입력해주세요");
+        return false;
+      }
+
+      let key = nm.value + "\\" + new Date().getTime();
+      // String 으로 저장하기 (방법 1)
+      // let value = phone.value + "\\" + color.value;
+      // localStorage.setItem(key, value);
+
+      // 배열로 저장하기 (방법 2)
+      let arr = [];
+      arr.push(nm.value);
+      arr.push(phone.value);
+      arr.push(color.value);
+      localStorage.setItem(key,JSON.stringify(arr));
+
+      // JSON.stringify(Array 또는 Object) => array를 string 으로 / JSON.parse(String) => String을 다시 Array 또는 Object로
+      addList(key);
+      resetVal();
+    }
+
+    function resetVal() {
+      color.value = "";
+      nm.value = "";
+      phone.value = "";
+    }
+
+    function addList(key) {
+      let list = document.querySelector("#list");
+      let element = document.createElement('li');
+
+      // String 으로 저장하기 (방법 1) 
+      // let name = key.split("\\")[0];
+      // let phone = localStorage.getItem(key).split("\\")[0];
+      // let color = localStorage.getItem(key).split("\\")[1];
+
+      // element.innerText = name + " / " + phone;
+      // element.style.backgroundColor = color;
+
+      // 배열로 저장하기 (방법 2)
+      let values = JSON.parse(localStorage.getItem(key));
+      let objArr = {
+        "name" : values[0],
+        "phone" : values[1],
+        "color" : values[2]
+      };
+
+      element.innerText = objArr.name + " / " + objArr.phone;
+      element.style.backgroundColor = objArr.color;
+
+      element.setAttribute("data-key", key);
+      element.setAttribute("onclick", "deleteThis(this)");
+
+      list.append(element);
+    }
+
+    function deleteAll() {
+      let list = document.querySelector("#list");
+      list.innerHTML = "";
+      localStorage.clear();
+    }
+
+    function deleteThis(element) {
+      let list = document.querySelector("#list");
+      let key = element.dataset.key;
+      list.removeChild(element);
+      localStorage.removeItem(key);
+    }
+
+    function showList() {
+      if (localStorage.length > 0) {
+        for(let i = 0; i < localStorage.length; i++) {
+          addList(localStorage.key(i));
+        }
+      }
+    }
+  </script>
+</body>
+</html>

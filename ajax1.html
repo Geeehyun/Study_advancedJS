@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX 통신 테스트</title>
+</head>
+<body>
+  <h1>AJAX 통신 테스트</h1>
+  <a href="contents/html1.html">링크로 직접 요청</a>
+  <button onclick="location.href = 'contents/html1.html';">버튼을 클릭하여 요청</button>
+  <hr>
+  <button onclick="requestAjax()">버튼 클릭하여 AJAX 통신</button>
+  <div id="result">
+  </div>
+  <script>
+    function requestAjax() {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "contents/html1.html", true); // 요청방식 결정
+      xhr.send(); // 요청 전송
+      xhr.onload = function() {  // onreadystatechange와 동일
+        const result = document.querySelector("#result");
+        result.innerHTML = xhr.responseText + "<hr>";
+      };
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메모장</title>
+  <script>
+    let msg, info;
+    function pageLoad() {
+      msg = document.querySelector("#txtBox");
+      msg.value = window.localStorage.getItem("memo");
+      info = document.querySelector("#info");
+
+      forEachKey(getKeyInfo);
+      displayItemsInfo();
+      
+    }
+    function saveText() {
+      
+      info.style.display = "block";
+      window.localStorage.setItem("memo", msg.value);
+
+      forEachKey(getKeyInfo);
+      displayItemsInfo();
+      console.log("memo : " + localStorage.getItem("memo"));
+    }
+
+    function clearText() {
+      msg.value = "";
+      localStorage.clear();
+      info.style.display = "none";
+    }
+
+    function getKeyInfo(param) {
+      console.log("param : " + param);
+    }
+
+    function displayItemsInfo() {
+      for(let i = 0 ; i < localStorage.length; i++) {
+        console.log("displayItemsInfo : " + localStorage.getItem(localStorage.key(i)));
+      }
+    }
+
+    function forEachKey(callback) {
+      for(let i = 0; i < localStorage.length; i++) 
+      callback(localStorage.key(i));
+    }
+  </script>
+</head>
+<body onload="pageLoad()">
+  <h1>스토리지를 이용한 메모장</h1>
+  <h2>메시지</h2>
+  <textarea id="txtBox" cols="50" rows="5" onkeyup="saveText()"></textarea>
+  <br>
+  <input id="clear" type="button" value="메시지 비우기" onclick="clearText()">
+
+  <p id="info" style="display: none;">메모 내용이 저장되었습니다.</p>
+
+</body>
+</html>

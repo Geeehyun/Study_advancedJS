@@ -1,0 +1,19 @@
+{ "students" : 
+  [
+    {
+      "name" : "장지현",
+      "age" : 20,
+      "kind" : "Good!"
+    },
+    {
+      "name" : "강윤화",
+      "age" : 22,
+      "kind" : "Good!1"
+    },
+    {
+      "name" : "정성훈",
+      "age" : 21,
+      "kind" : "Good!2"
+    }
+  ]
+}

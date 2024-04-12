@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON 응답</title>
+</head>
+<body>
+  <h2>fetch() 함수 사용</h2>
+  <hr>
+  <script>
+    function json2Str(obj) {
+      for (let e in obj) {
+        document.body.innerHTML += `<h3>${obj[e]}</h3>`;
+      }
+    }
+    fetch('contents/sample.json')  // 얘도 비동기 통신 방법 중 하나
+    .then(response => {
+      return response.json();
+    })
+    .then(obj => json2Str(obj));
+  </script>
+</body>
+</html>

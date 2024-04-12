@@ -1,0 +1,26 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX 요청파일</title>
+</head>
+<body>
+  <h2>AJAX 요청파일</h2>
+  <h2>HTML 테스트</h2>
+</body>
+</html> -->
+<select id="select1" onchange="sido()">
+  <option value="서울">서울</option>
+  <option value="경기">경기</option>
+  <option value="충청">충청</option>
+  <option value="강원">강원</option>
+</select>
+<select id="select2" onchange="sido()">
+</select>
+<script>
+  function sido() {
+    let si = document.querySelector("#select2");
+    si.innerHTML = "<option value='세부1'> 세부 </option>";
+  }
+</script>

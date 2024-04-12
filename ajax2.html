@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XML 응답 처리</title>
+</head>
+<body>
+  <h2>XML 응답 처리</h2>
+  <hr>
+  <script>
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "contents/sample.xml", true);
+    xhr.send();
+    xhr.onload = () => {
+      if (xhr.status == 200) { //요청성공
+        const xml = xhr.responseXML;
+        const rootE = xml.getElementsByTagName("testxml");
+        let output = "";
+        for(i=1;i<rootE[0].childNodes.length; i+=2) {  // xml 의 노드는 2개씩 차지함 => 따라서 증감을 2개씩 함
+          output += `<h3>${rootE[0].childNodes[i].firstChild.nodeValue}</h3>`;
+        }
+        document.body.innerHTML = output;
+      } else { //요청실패
+        document.body.innerHTML = "<h3>요청실패</h3>";
+      }
+    }
+  </script>
+</body>
+</html>

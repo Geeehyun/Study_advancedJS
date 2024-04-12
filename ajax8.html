@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX 요청 테스트</title>
+</head>
+<body>
+  <h1>AJAX 요청 테스트</h1>
+  <hr>
+  <div id="target">
+
+  </div>
+  <script>
+    let url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=75474bdfc6c0a4eb738939dd66c101b5&targetDt=20240401";
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.send();
+    xhr.addEventListener("load", ()=> {
+      let text = JSON.parse(xhr.responseText);
+      let rank = text.boxOfficeResult.dailyBoxOfficeList;
+      let r = 1;
+      for (let e in rank) {
+        document.querySelector("#target").innerHTML += (r) +"위 :"+ rank[e].movieNm + "<br>";
+        r++;
+      }
+      // document.querySelector("#target").textContent = text.boxOfficeResult.dailyBoxOfficeList[0].movieNm;
+    })
+  </script>
+</body>
+</html>

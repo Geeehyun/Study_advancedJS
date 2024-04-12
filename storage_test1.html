@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실습 2</title>
+</head>
+<body>
+  <script>
+    let key = prompt("학년을 입력하세요.");
+    let value = prompt("이름을 입력하세요.");
+
+    localStorage.setItem(key, value);
+
+    if (key != null && value != null) {
+      let element = document.createElement('p');
+      element.innerText = key + " : " + localStorage[key];
+      document.body.append(element);
+    }
+  </script>
+</body>
+</html>

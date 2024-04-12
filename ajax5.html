@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX 테스트</title>
+  <script>
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "contents/sample2.json", true);
+    xhr.send();
+    xhr.onload = (e)=> {
+      const str = xhr.responseText;
+      const result = JSON.parse(str);
+      const objStd = result.students;
+      for (let obj of objStd) {
+        for(let objKey in obj) {
+          document.body.innerHTML += `<h3>${objKey} : ${obj[objKey]}</h3>`;
+        }
+      }
+      
+    };
+  </script>
+</head>
+<body>
+  <h2>JSON 응답</h2>
+  <hr>
+</body>
+</html>
